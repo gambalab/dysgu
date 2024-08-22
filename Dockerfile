@@ -9,22 +9,22 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN pip install dysgu==1.6.2 && \
-wget https://github.com/samtools/samtools/releases/download/1.18/samtools-1.18.tar.bz2 && \
-tar -xvf samtools-1.18.tar.bz2 && \
-rm samtools-1.18.tar.bz2 && \
-mv samtools-1.18 samtools && \
+RUN pip install dysgu==1.6.6 && \
+wget https://github.com/samtools/samtools/releases/download/1.20/samtools-1.20.tar.bz2 && \
+tar -xvf samtools-1.20.tar.bz2 && \
+rm samtools-1.20.tar.bz2 && \
+mv samtools-1.20 samtools && \
 cd samtools && ./configure && \
-make && \
+make -j4 && \
 make install && \
 cd ../ && \
-wget https://github.com/samtools/bcftools/releases/download/1.18/bcftools-1.18.tar.bz2 && \
-tar -xvf bcftools-1.18.tar.bz2 && \
-rm bcftools-1.18.tar.bz2 && \
-mv bcftools-1.18 bcftools && \
+wget https://github.com/samtools/bcftools/releases/download/1.20/bcftools-1.20.tar.bz2 && \
+tar -xvf bcftools-1.20.tar.bz2 && \
+rm bcftools-1.20.tar.bz2 && \
+mv bcftools-1.20 bcftools && \
 cd bcftools && \
 ./configure && \
-make && \
+make -j4 && \
 make install && \
 cd ../
 
